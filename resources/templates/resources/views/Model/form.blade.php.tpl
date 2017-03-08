@@ -2,7 +2,7 @@
     @foreach($model['attributes'] as $attribute)
         <p>
             {{ Form::label($attribute) }}
-            {{ Form::text($attribute) }}
+            {{ Form::text($model->getTable().'['.$attribute.']') }}
         </p>
     @endforeach
     <p>
