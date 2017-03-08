@@ -8,4 +8,5 @@ use Semge\Laravel\BaseModel;
 class [Model] extends BaseModel
 {
     protected $table = '[tablename]';
+    protected $fields = [];
 }

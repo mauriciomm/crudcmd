@@ -35,7 +35,8 @@ class LaravelFramework implements FrameworkInterface
             'model' => $model,
             'repository' => $model.'Repository',
             'factory' => $model.'Factory',
-            'view' => strtolower($model)
+            'view' => strtolower($model),
+            'migration' => strtolower($model)
         ];
     }
 
@@ -47,6 +48,7 @@ class LaravelFramework implements FrameworkInterface
         $files[] = $this->getControllerFileName($controller);
         $files[] = $this->getRepositoryFileName($repository);
         $files[] = $this->getFactoryFileName($factory);
+        $files[] = $this->getMigrationFileName($migration);
         $files = array_merge($files, $this->getViewsFileName($view));
         return $files;
     }
@@ -90,6 +92,12 @@ class LaravelFramework implements FrameworkInterface
             $files[] = $path.'/'.$view.'.blade.php';
         }
         return $files;
+    }
+
+    public function getMigrationFileName($migration)
+    {
+        $file = getcwd().'/database/migrations/Y_m_d_his_create_'.$migration.'_table.php';
+        return $file;
     }
 
     public function __toString()

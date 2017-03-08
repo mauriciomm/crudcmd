@@ -18,7 +18,8 @@ class CrudCommand extends Command
             ->setHelp('This command allows you create a crud structure for your app')
             ->addArgument('framework', InputArgument::REQUIRED, 'The framework name')
             ->addArgument('model', InputArgument::REQUIRED, 'The model name')
-            ->addOption('templates', null, InputOption::VALUE_OPTIONAL, 'set templates path');
+            ->addOption('templates', null, InputOption::VALUE_OPTIONAL, 'set templates path')
+            ->addOption('schema', null, InputOption::VALUE_OPTIONAL, 'set schema for model');
 
     }
 
@@ -70,6 +71,8 @@ class CrudCommand extends Command
         $output->writeln('get content from: '.$template_path);
         $content = $this->readFromTemplate($template_path, $model);
         $output->writeln($content);
+        $now = date('Y_m_d_his');
+        $filepath = str_replace('Y_m_d_his', $now, $filepath);
         if($this->createDir($filepath)){
             $handler = fopen($filepath, 'w');
             fwrite($handler, $content);

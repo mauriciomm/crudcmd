@@ -12,6 +12,7 @@ interface FrameworkInterface
     public function getRepositoryFileName($repository);
     public function getFactoryFileName($factory);
     public function getViewsFileName($view);
+    public function getMigrationFileName($migration);
     public function getTemplatesPath();
     public function __toString();
 }
