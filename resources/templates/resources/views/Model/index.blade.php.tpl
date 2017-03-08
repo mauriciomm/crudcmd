@@ -10,7 +10,7 @@
     @foreach($collection as $item)
         <tr>
         @foreach($item['attributes'] as $attribute => $value)
-        <td>{{ $item->attribute }}</td>
+        <td>{{ $item->$attribute }}</td>
         @endforeach
         <td><a href="{{ route('casa.edit', $item->id) }}">Editar</a></td>
         <td><form action="{{ route('casa.destroy', $item->id) }}" method="POST">
