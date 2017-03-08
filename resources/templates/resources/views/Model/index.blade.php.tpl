@@ -12,8 +12,8 @@
         @foreach($item['attributes'] as $attribute => $value)
         <td>{{ $item->$attribute }}</td>
         @endforeach
-        <td><a href="{{ route('casa.edit', $item->id) }}">Editar</a></td>
-        <td><form action="{{ route('casa.destroy', $item->id) }}" method="POST">
+        <td><a href="{{ route('[tablename].edit', $item->id) }}">Editar</a></td>
+        <td><form action="{{ route('[tablename].destroy', $item->id) }}" method="POST">
             {{ csrf_field() }}
             <input type="hidden" name="_method" value="DELETE">
             <input type="submit" value="Excluir">
