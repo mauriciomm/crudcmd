@@ -1,0 +1,25 @@
+{
+    "name": "gwmoura/crudcmd",
+    "description": "Crud Agnostic Template.",
+    "keywords": ["laravel"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "George Moura",
+            "email": "gwmoura@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Crudcmd\\": "src/Crudcmd"
+        }
+    },
+    "require": {
+        "symfony/console": "~2.3|~3.0",
+        "symfony/process": "~2.3|~3.0",
+        "guzzlehttp/guzzle": "~4.0|~5.0|~6.0"
+    },
+    "bin": [
+        "crudcmd"
+    ]
+}
