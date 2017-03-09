@@ -6,7 +6,11 @@ Para usar esse pacote você precisa do pacote `semge/core`
 
 #### Usando
 
-`composer require gwmoura/crudcmd`
+`composer require gwmoura/crudcmd:dev-master`
+
+Copie os templates
+
+`./vendor/bin/crudcmd template:copy laravel`
 
 Criando um crud simples
 

@@ -8,4 +8,5 @@ if (file_exists(__DIR__.'/../../autoload.php')) {
 $app = new Symfony\Component\Console\Application('Crud Cmd', '0.0.1');
 $app->add(new Crudcmd\Command\CrudCommand);
 $app->add(new Crudcmd\Command\DownloadCommand);
+$app->add(new Crudcmd\Command\CopyCommand);
 $app->run();
