@@ -42,20 +42,32 @@ class CopyCommand extends Command
              $output->writeln("Dir not exists");
              return false;
          }
-         $files = scandir($folder);
+         $files = $this->loadFilesFrom($folder);
          foreach($files as $file){
-             $src = $folder.'/'.$file;
-             $dest = $template_path.'/'.$file;
-             if(file_exists($src)){
-                 if(copy($src, $dest)){
-                     $output->writeln("Copied $src > $dest");
-                 }else{
-                     $output->writeln("Problem to copy $src");
-                 }
-             }else{
-                 $output->writeln("File $src not exists");
-             }
+            $dest = str_replace($folder.'/','', $file);
+            $dest = './'.$dest;
+            if(copy($file, $dest)){
+                $output->writeln("Copied $file > $dest");
+            }else{
+                $output->writeln("Problem to copy $src");
+            }
          }
          return $this;
+    }
+
+    private function loadFilesFrom($dir)
+    {
+        $allFiles = [];
+        $files = scandir($dir);
+        foreach($files as $file){
+            $src = $dir.'/'.$file;
+            if(!is_dir($src)){
+                $allFiles[] = $src;
+            }else if($file != "." && $file != ".."){
+                $f = $this->loadFilesFrom($src);
+                $allFiles = array_merge($allFiles, $f);
+            }
+        }
+        return $allFiles;
     }
 }
