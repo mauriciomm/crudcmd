@@ -3,23 +3,38 @@
 
 @section('content')
     <h4>[Model]</h4>
-    {{ link_to_route('[tablename].create', 'Criar novo', null, ['class' => 'btn btn-default']) }}
+    {{ link_to_route('[tablename].create', 'Cadastrar Novo', null, ['class' => 'btn btn-default']) }}
     <hr/>
-    <h1>Casas</h1>
-    <table class="table">
-    @foreach($collection as $item)
-        <tr>
-        @foreach($item['attributes'] as $attribute => $value)
-        <td>{{ $item->$attribute }}</td>
-        @endforeach
-        <td><a href="{{ route('[tablename].edit', $item->id) }}">Editar</a></td>
-        <td><form action="{{ route('[tablename].destroy', $item->id) }}" method="POST">
-            {{ csrf_field() }}
-            <input type="hidden" name="_method" value="DELETE">
-            <input type="submit" value="Excluir">
-        </form></td>
-        </tr>
-    @endforeach
-    </table>
+
+
+    <div class="container">
+        <table class="table table-bordered table-striped" id="{{[tablename]}}-table">
+            <thead>
+                <tr>
+                    <th>Descrição</th>
+                    <div class="col-md-2"><th>Ações</th></div>
+                </tr>
+            </thead>
+        </table>
+    </div>
+@endsection
+
+@section('js')
+<script>
+
+    $('#{{[tablename]}}-table').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+        },
+        processing: true,
+        serverSide: true,
+        ajax: '{!! route('[tablename].data') !!}',
+        columns: [
+            { data: 'descricao', name: 'descricao' },
+            { data: 'acoes', name: 'acoes', orderable: false, searchable: false},
+        ]
+    });
+
+</script>
 @endsection
 
