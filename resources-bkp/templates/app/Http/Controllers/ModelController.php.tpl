@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Redirect;
 use Semge\Laravel\BaseControllerTrait;
 use App\Http\Requests\CasaRequest;
 
+use Datatables;
+
 class [Model]Controller extends Controller
 {
     use BaseControllerTrait;
@@ -20,15 +22,16 @@ class [Model]Controller extends Controller
     */
     public function anyData()
     {
-    	$[Model] = $repositoryClass->getDataForDataTable();
+    	$[Model] = $this->repository->getDataForDataTable();
 
     	return Datatables::of($[Model])
         ->addColumn('acoes', function($[Model]) {
             return '<a href="'.route('[tablename].edit', [$[Model]->id]).'" class="btn btn-default">Editar</a>
             <a href="'.route('[tablename].update', [$[Model]->id]).'" class="btn btn-default">
-            (($[Model]->ativo == 's') ? 'Desativar' :'Ativar')
+            '.(($[Model]->ativo == 's') ? 'Desativar' :'Ativar').'
             </a>';
         })
+        ->rawColumns(['acoes'])
         ->removeColumn('id')
         ->make(true);
     }
